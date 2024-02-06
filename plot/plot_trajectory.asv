@@ -5,9 +5,11 @@ function plot_trajectory(kspace)
     % Plot Nshots trajectories with different colors
     % add dot on each point to make it easier to see
     addpath(genpath('.'));
-    kspace
+    kspace =  kspace ./ pi ./ 1.2;
     Nshots = size(kspace,1);
     Ndim = size(kspace,3);
+        % set axis equal
+    
     for i = 1:Nshots
         if Ndim == 2
             plot(kspace(i,:,1),kspace(i,:,2),'LineWidth',2,'Marker','.','MarkerSize',10);            
@@ -19,10 +21,10 @@ function plot_trajectory(kspace)
     % add arrowed lines to show the axes crossing zero
     % add arrow to each axis
     if Ndim == 2
-        h = plot([-1 1],[0 0],'k','LineWidth',1.5);
-        line2arrow(h);
-        h2 = plot([0 0],[-1 1],'k','LineWidth',1.5);
-        line2arrow(h2);
+        h1 = plot([-1 1],[0 0],'k','LineWidth',1.5);
+        line2arrow(plot([-1 1],[0 0],'k','LineWidth',1.5));
+%         h = ;
+        line2arrow(plot([0 0],[-1 1],'k','LineWidth',1.5));
     elseif Ndim == 3
         h = plot3([-1 1],[0 0],[0 0],'k','LineWidth',1.5);
         line2arrow(h);
@@ -34,8 +36,7 @@ function plot_trajectory(kspace)
 
     % turn on grid
     grid on;
-    % set axis equal
-    axis equal;
+
     % turn of axis, and ticklabels
     axis off;
     % turn of ticks
