@@ -14,7 +14,7 @@ smax = 15000;	 % 150 T/m/s
 gmax = 4;	 % G/cm
 T = .000004;	 % Seconds
 N = 16;		 % Interleaves
-Fcoeff = [51.2 -40] 	% FOV decreases linearly from 24 to 12cm.
+Fcoeff = [24 -16] 	% FOV decreases linearly from 24 to 12cm.
 res = 1;
 rmax = 5/res;		% cm^(-1), corresponds to 1mm resolution.
 
@@ -26,5 +26,5 @@ rmax = 5/res;		% cm^(-1), corresponds to 1mm resolution.
         kspace(i, :, 1) = squeeze(real(k)*cos(2*pi*(i-1)/N)-imag(k)*sin(2*pi*(i-1)/N));
         kspace(i, :, 2) = squeeze(real(k)*sin(2*pi*(i-1)/N)+imag(k)*cos(2*pi*(i-1)/N));
     end
-    kspace = kspace ./ rmax.*pi;
+    kspace = kspace ./ rmax;
 end
